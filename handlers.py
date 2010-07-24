@@ -10,8 +10,8 @@ class FileHandler(webapp.RequestHandler):
         file = File.get_by_key_name(file_uuid)
 
         if file:
-            self.response.headers.add_header('Content-Disposition', 'inline', filename=file.name)
-            self.response.headers.add_header('Content-Type', file.content_type)
+            self.response.headers['Content-Disposition'] = 'inline; filename=%s' % file.name
+            self.response.headers['Content-Type'] = file.content_type
 
             for fragment in file.fragments:
                 self.response.out.write(fragment.data)
