@@ -4,6 +4,7 @@ from google.appengine.ext import webapp
 from time import time
 from uuid import uuid4
 from models import File, Fragment
+from auth import authenticated
 from utils import chunks, http_format_date, http_parse_date
 
 class FileHandler(webapp.RequestHandler):
@@ -27,6 +28,7 @@ class FileHandler(webapp.RequestHandler):
         else:
             self.error(404)
 
+    @authenticated
     def put(self, filename):
         file_uuid = uuid4().hex
         
@@ -41,6 +43,7 @@ class FileHandler(webapp.RequestHandler):
         self.response.set_status(201)
         self.response.out.write(file_uuid)
 
+    @authenticated
     def delete(self, file_uuid):
         file = File.get_by_key_name(file_uuid)
         
