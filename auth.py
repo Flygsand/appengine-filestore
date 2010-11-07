@@ -7,12 +7,12 @@ def verify(request):
     client_id = request.headers.get('X-AEFS-ClientId', None)
     signature = request.headers.get('X-AEFS-Signature', None)
     body = request.body
-    
+
     if client_id and signature:
         client = Client.get_by_key_name(client_id)
         if not client:
             client = Client(key_name=client_id)
-            
+
         h = hmac.new(config.shared_secret, client_id + str(client.nonce) + body, hashlib.sha1)
         client.new_nonce()
         client.put()
@@ -29,4 +29,4 @@ def authenticated(fn):
             handler.error(401)
 
     return wrapper
-            
+

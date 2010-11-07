@@ -7,7 +7,7 @@ operations:
     PUT /<filename> HTTP/1.1
     ...
     <body>
-    
+
 Creates an entry for a file named `<filename>` with the data given by
 `<body>` into the file store. Returns a `201 Created` along with a
 unique identifier (UUID) as the response body. This identifier is used
@@ -24,4 +24,4 @@ file in the file store.
 Deletes the file referenced by `uuid` and returns a `200 OK`, or a
 `404 Not Found` if `<uuid>` was not referencing any file in the file
 store.
-  
+

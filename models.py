@@ -8,10 +8,10 @@ class File(db.Model):
 class Fragment(db.Model):
     file = db.ReferenceProperty(File, collection_name='fragments', required=True)
     data = db.BlobProperty(required=True)
-    
+
 class Client(db.Model):
     nonce = db.IntegerProperty(default=0)
 
     def new_nonce(self):
         self.nonce += 1
-        
+

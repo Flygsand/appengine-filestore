@@ -13,7 +13,7 @@ import threading
 from google.appengine.api import memcache
 from google.appengine.api import apiproxy_stub_map
 from google.appengine.datastore import datastore_pb
-from google.appengine.api import apiproxy_rpc 
+from google.appengine.api import apiproxy_rpc
 
 """Provides a shim that caches datastore Get calls.
 
@@ -61,13 +61,13 @@ class APIProxyShim(object):
     """Pass-through to the wrapped stub."""
     return getattr(self._wrapped_stub, name)
 
-  def CreateRPC(self): 
-    """Creates RPC object instance. 
-        Returns: 
-          a instance of RPC. 
-    """ 
-    return apiproxy_rpc.RPC(stub=self) 
-  
+  def CreateRPC(self):
+    """Creates RPC object instance.
+        Returns:
+          a instance of RPC.
+    """
+    return apiproxy_rpc.RPC(stub=self)
+
   @classmethod
   def Install(cls):
     """Installs the shim. Only needs to be run once at import time.
@@ -81,7 +81,7 @@ class APIProxyShim(object):
       cls._instance = cls(wrapped_stub)
       stub_dict = apiproxy_stub_map.apiproxy._APIProxyStubMap__stub_map
       stub_dict[cls.SERVICE_NAME] = cls._instance
-      
+
   @classmethod
   def Uninstall(cls):
     """Uninstalls the shim.

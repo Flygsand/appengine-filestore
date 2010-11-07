@@ -31,7 +31,7 @@ class FileHandler(webapp.RequestHandler):
     @authenticated
     def put(self, filename):
         file_uuid = uuid4().hex
-        
+
         file = File(name=str(urllib.unquote(filename)),
              content_type=self.request.headers.get('Content-Type', None),
              key_name=file_uuid)
@@ -46,7 +46,7 @@ class FileHandler(webapp.RequestHandler):
     @authenticated
     def delete(self, file_uuid):
         file = File.get_by_key_name(file_uuid)
-        
+
         if file:
             map(lambda f: f.delete(), file.fragments)
             file.delete()
